@@ -1,0 +1,12 @@
+# ssh_config为ssh客户端的配置文件
+# Host []:表示对终端的筛选
+# StrictHostKeyChecking no:表示会将主机的密钥加入到known_hosts文件中
+Host localhost
+        StrictHostKeyChecking no
+
+Host 0.0.0.0
+        StrictHostKeyChecking no
+  
+Host hadoop-*
+        StrictHostKeyChecking no
+
