@@ -54,6 +54,7 @@ dbin/clean_container.sh		# 删除Hadoop集群容器
 
 * .sh文件中的line 1:#!/bin/bash   表示使用/bin/bash路径下的shell来解释执行脚本
 * 可通过` netstat -ntlp `查看端口占用情况
+* 通过` jps `查看当前正在运行的java进程
 
 
 
@@ -66,7 +67,7 @@ dbin/clean_container.sh		# 删除Hadoop集群容器
   * 网关：192.168.9.1
   * node01：192.169.9.9   node02：192.168.9.19    node03：192.169.9.199
 
-* outer volume 
+* outer volume *
 
 
 
@@ -84,24 +85,62 @@ dbin/clean_container.sh		# 删除Hadoop集群容器
 * node3-SecondaryNameNode + DataNode + NodeManager
   * 9878:9868-SecondaryNode for Web
 
-* log
+* log*
   * path: /var/log/hadoop
 
 
 
 ## 配置步骤
 
-1. 执行` dbin/create_network.sh`创建Hadoop子网
-2. 执行` build_docker_image.sh `构建hadoop镜像
-3. 执行` dbin/start_container.sh `启动hadoop集群，注意只能首次执行，之后执行` dbin/restart_container.sh `
-4. 若主机访问` localhost:9880 `,` localhost:8098 `,` localhost:9878 `,` localhost:29888 `可进入Web界面，说明配置成功
+1. 将准备好的软件包置于wrap下
+2. 执行` dbin/create_network.sh`创建Hadoop子网
+3. 执行` build_docker_image.sh `构建hadoop镜像
+4. 执行` dbin/start_container.sh `启动hadoop集群，注意只能首次执行，之后执行` dbin/restart_container.sh `
+5. 若主机访问` localhost:9880 `,` localhost:8098 `,` localhost:9878 `,` localhost:29888 `可进入Web界面，说明配置成功
 
 
 
 ## 测试使用
 
-* HDFS-文件上传与下载
-* mapreduce-红楼梦词频统计
+### 初步测试
+
+* HDFS-文件上传下载与验证查看
+
+```sh
+#! /bin/bash
+# 进入到Hadoop主机中执行
+
+hadoop fs -mkdir /input		# 在分布式文件系统创建文件夹
+
+# 运行前需在本地的HADOOP_HOME下创建input目录，并在该目录下创建hello.txt文件
+hadoop fs -put $HADOOP_HOME/input/hello.txt /input		# 将本地的hello.txt上传到分布式文件系统上
+
+cd /opt/hadoop-3.3.1/dfs/data/current/BP-1866481469-192.168.9.9-1634187135854/current/finalized/subdir0/subdir0		# 切换到上传的文件位于HDFS服务器的存储路径
+cat blk_*		# 查看上传文件内容，验证一致
+
+hdfs dfs -get /input/hello.txt /opt		# 下载分布式文件系统上的文件到本地
+```
+
++ 执行提供的mr任务
+
+```sh
+#! /bin/bash
+# 进入到Hadoop主机中执行
+
+hadoop fs -rm -r /output		# 如果已存在output目录需要先删除
+
+hadoop jar $HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.1.jar wordcount /input /output		# 执行官方提供的词频统计任务，并指定输入和输出目录
+
+# 之后可访问 localhost:29888 查看历史任务
+```
+
+
+
+### 进阶测试*
+
++ mapreduce-红楼梦词频统计
+
+
 
 
 
@@ -109,7 +148,7 @@ dbin/clean_container.sh		# 删除Hadoop集群容器
 
 jars, log, 外部卷
 
-测试使用部分
+进阶测试
 
 
 

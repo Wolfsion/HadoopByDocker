@@ -61,6 +61,7 @@ COPY configs/hadoop-env.sh $HADOOP_HOME/etc/hadoop/hadoop-env.sh
 COPY configs/hdfs-site.xml $HADOOP_HOME/etc/hadoop/hdfs-site.xml
 COPY configs/core-site.xml $HADOOP_HOME/etc/hadoop/core-site.xml
 COPY configs/yarn-site.xml $HADOOP_HOME/etc/hadoop/yarn-site.xml
+COPY configs/mapred-site.xml $HADOOP_HOME/etc/hadoop/mapred-site.xml
 COPY configs/workers $HADOOP_HOME/etc/hadoop/workers
 
 RUN mkdir -p $HADOOP_HOME/exSbin

@@ -20,10 +20,24 @@
         <value>hadoop-node02</value>
     </property>
 
+    <!-- 环境变量的继承 -->
+    <property>
+        <name>yarn.nodemanager.env-whitelist</name>
+        <value>JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CO
+        NF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_MAP
+        RED_HOME</value>
+    </property>
+
     <!--开启日志聚合功能 -->
     <property>
         <name>yarn.log-addregation-enable</name>
         <value>true</value>
+    </property>
+
+    <!-- 设置日志聚集服务器地址 -->
+    <property> 
+        <name>yarn.log.server.url</name> 
+        <value>http://hadoop-node01:19888/jobhistory/logs</value>
     </property>
 
     <!--设置聚合日志在hdfs上的保存时间 -->
