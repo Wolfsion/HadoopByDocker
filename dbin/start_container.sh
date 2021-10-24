@@ -18,19 +18,19 @@ echo "start hadoop-node01 container ..."       # 人机交互信息
 docker run --add-host hadoop-node02:192.168.9.19 --add-host hadoop-node03:192.168.9.199 \
     -d --restart=always --net hadoop --ip 192.168.9.9 \
     --privileged -p 9880:9870 -p 29888:19888 \
-    --name hadoop-node01 --hostname hadoop-node01 la/hadoop 
+    --name hadoop-node01 --hostname hadoop-node01 hadoop 
 
 echo "start hadoop-node02 container..."      # 人机交互信息
 docker run --add-host hadoop-node01:192.168.9.9 --add-host hadoop-node03:192.168.9.199 \
     -d --restart=always --net hadoop --ip 192.168.9.19 \
     --privileged  -p 8098:8088 \
-    --name hadoop-node02 --hostname hadoop-node02 la/hadoop
+    --name hadoop-node02 --hostname hadoop-node02 hadoop
 
 echo "start hadoop-node03 container..."      # 人机交互信息
 docker run --add-host hadoop-node01:192.168.9.9 --add-host hadoop-node02:192.168.9.19 \
     -d --restart=always --net hadoop --ip 192.168.9.199 \
     --privileged -p 9878:9868 \
-    --name hadoop-node03 --hostname hadoop-node03 la/hadoop
+    --name hadoop-node03 --hostname hadoop-node03 hadoop
 
 
 sleep 5     # 暂停5s

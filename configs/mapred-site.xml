@@ -23,25 +23,6 @@
         <value>yarn</value>
     </property>
 
-    <property>
-        <name>yarn.app.mapreduce.am.env</name>
-        <value>HADOOP_MAPRED_HOME=$HADOOP_HOME</value>
-    </property>
-    <property>
-        <name>mapreduce.map.env</name>
-        <value>HADOOP_MAPRED_HOME=$HADOOP_HOME</value>
-    </property>
-    <property>
-        <name>mapreduce.reduce.env</name>
-        <value>HADOOP_MAPRED_HOME=$HADOOP_HOME</value>
-    </property>
-
-    <!--开启小任务模式 -->
-    <property>
-        <name>mapreduce.job.ubertask.enable</name>
-        <value>true</value>
-    </property>
-
     <!--设置历史任务的主机和端口 -->
     <property>
         <name>mapreduce.jobhistory.address</name>
@@ -53,7 +34,7 @@
         <name>mapreduce.jobhistory.webapp.address</name>
         <value>hadoop-node01:19888</value>
     </property>
-    
+
 </configuration>
 
 

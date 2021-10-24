@@ -112,7 +112,7 @@ dbin/clean_container.sh		# 删除Hadoop集群容器
 
 hadoop fs -mkdir /input		# 在分布式文件系统创建文件夹
 
-# 运行前需在本地的HADOOP_HOME下创建input目录，并在该目录下创建hello.txt文件
+# 运行前需在本地的HADOOP_HOME下创建input目录，并在该目录下创建hello.txt文件，写入自定义内容
 hadoop fs -put $HADOOP_HOME/input/hello.txt /input		# 将本地的hello.txt上传到分布式文件系统上
 
 cd /opt/hadoop-3.3.1/dfs/data/current/BP-1866481469-192.168.9.9-1634187135854/current/finalized/subdir0/subdir0		# 切换到上传的文件位于HDFS服务器的存储路径
@@ -133,6 +133,8 @@ hadoop jar $HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.1.j
 
 # 之后可访问 localhost:29888 查看历史任务
 ```
+
+
 
 
 

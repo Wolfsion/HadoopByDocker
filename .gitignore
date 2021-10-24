@@ -1,3 +1,7 @@
 trash/*
 wrap/*
 DEVPROC.md
+configs/debug.sh
+configs/debugEnv.sh
+configs/debugMapR.sh
+configs/other/node*.sh
